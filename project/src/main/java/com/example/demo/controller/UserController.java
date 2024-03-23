@@ -7,23 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.services.*;
-import com.example.demo.model.*;
+import com.example.demo.services.UserService;
+import com.example.demo.model.User;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userServices;
+    private final UserService userService;
 
     @Autowired
-    public void userController(UserService userService) {
-        this.userServices = userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<User> getAllUsers() {
-        return userServices.allUsers();
+        return userService.allUsers();
     }
-
 }

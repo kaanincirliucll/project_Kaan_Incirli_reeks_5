@@ -9,7 +9,7 @@ import com.example.demo.model.User;
 
 @Repository
 public class UsersRepository {
-    private List<User> users;
+    public List<User> users;
 
     public UsersRepository() {
         users = new ArrayList<>();
