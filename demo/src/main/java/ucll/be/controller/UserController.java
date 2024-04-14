@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import ucll.be.services.UserService;
 import ucll.be.exception.ServiceException;
@@ -56,6 +59,23 @@ public class UserController {
         } else {
             List<User> users = userService.allUsers();
             return ResponseEntity.ok(users);
+        }
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        // Register the user
+        User registeredUser = userService.registerUser(user);
+        return new ResponseEntity<>(registeredUser, HttpStatus.OK);
+    }
+
+    @PutMapping("/{email}")
+    public ResponseEntity<User> updateUser(@PathVariable String email, @RequestBody User updatedUser) {
+        try {
+            User updatedUserData = userService.updateUser(email, updatedUser);
+            return new ResponseEntity<>(updatedUserData, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

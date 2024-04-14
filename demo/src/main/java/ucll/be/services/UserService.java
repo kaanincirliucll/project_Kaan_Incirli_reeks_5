@@ -41,4 +41,38 @@ public class UserService {
         }
         return users;
     }
+
+    public User registerUser(User user) {
+        // Check if the user already exists
+        if (userRepository.findByNameContainingIgnoreCase(user.getName()) != null) {
+            throw new ServiceException("User already exists.");
+        }
+
+        // Save the user in the repository
+        return userRepository.save(user);
+    }
+
+    public User updateUser(String email, User updatedUser) {
+        // Check if the user exists
+        User existingUser = userRepository.findByEmail(email).get(0);
+        if (existingUser == null) {
+            throw new ServiceException("User does not exist.");
+        }
+
+        // Check if the email address is being changed
+        if (!email.equals(updatedUser.getEmail())) {
+            throw new ServiceException("Email cannot be changed.");
+        }
+
+        // Validate updated user fields
+        // Add your validation logic here
+
+        // Update user details
+        existingUser.setName(updatedUser.getName());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setAge(updatedUser.getAge());
+
+        // Save updated user to repository
+        return userRepository.save(existingUser);
+    }
 }

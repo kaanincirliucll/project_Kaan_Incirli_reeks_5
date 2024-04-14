@@ -42,4 +42,23 @@ public class UsersRepository {
                 .filter(user -> user.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
+    public List<User> findByEmail(String eMail) {
+        return users.stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(eMail.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public User save(User user) {
+        try {
+            User updateUser = findByNameContainingIgnoreCase(user.getName()).get(0);
+            while (users.remove(updateUser)) {
+            }
+            users.add(user);
+            return user;
+        } catch (Exception e) {
+            users.add(user);
+            return user;
+        }
+    }
 }
