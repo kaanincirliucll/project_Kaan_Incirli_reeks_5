@@ -18,4 +18,8 @@ public class PublicationService {
     public List<Publication> findPublicationsByTitleAndType(String title, String type) {
         return publicationRepository.findPublicationsByTitleAndType(title, type);
     }
+
+    public List<Publication> findPublicationsByAvailableCopies(int availableCopies) {
+        return publicationRepository.findPublicationsByAvailableCopies(availableCopies);
+    }
 }

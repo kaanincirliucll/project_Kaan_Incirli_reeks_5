@@ -15,12 +15,13 @@ public class PublicationRepository {
 
     public PublicationRepository() {
         books = new ArrayList<>();
-        books.add(new Book("Java Programming", "John Doe", "123456789", 2022));
-        books.add(new Book("Spring Boot in Action", "Jane Smith", "987654321", 2021));
+        books.add(new Book("Java Programming", "John Doe", "123456789", 2022, 2));
+        books.add(new Book("Spring Boot in Action", "Jane Smith", "987654321", 2021, 5));
 
         magazines = new ArrayList<>();
-        magazines.add(new Magazine("National Geographic", "Editor A", "NG123", 2022));
-        magazines.add(new Magazine("Time Magazine", "Editor B", "TM456", 2022));
+        magazines.add(new Magazine("National Geographic", "Editor A", "NG123", 2022, 1));
+        magazines.add(new Magazine("National Geographic", "Editor A", "NG123", 2022, 3));
+        magazines.add(new Magazine("Time Magazine", "Editor B", "TM456", 2022, 18));
     }
 
     public List<Publication> findPublicationsByTitleAndType(String title, String type) {
@@ -61,4 +62,15 @@ public class PublicationRepository {
             return new ArrayList<>();
         }
     }
+
+    public List<Publication> findPublicationsByAvailableCopies(int availableCopies) {
+        List<Publication> allPublications = new ArrayList<>();
+        allPublications.addAll(books);
+        allPublications.addAll(magazines);
+
+        return allPublications.stream()
+                .filter(publication -> publication.getAvailableCopies() >= availableCopies)
+                .collect(Collectors.toList());
+    }
+
 }

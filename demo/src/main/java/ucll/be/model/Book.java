@@ -4,8 +4,8 @@ public class Book extends Publication {
     private String author;
     private String isbn;
 
-    public Book(String title, String author, String isbn, int publicationYear) {
-        super(title, publicationYear);
+    public Book(String title, String author, String isbn, int publicationYear, int availableCopies) {
+        super(title, publicationYear, availableCopies);
         setAuthor(author);
         setIsbn(isbn);
     }
