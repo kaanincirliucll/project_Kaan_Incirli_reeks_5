@@ -1,9 +1,20 @@
 package ucll.be.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "PUBLICATION")
 public abstract class Publication {
-    private String title;
-    private int publicationYear;
-    private int availableCopies;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+
+    protected String title;
+    protected int publicationYear;
+    protected int availableCopies;
 
     public Publication(String title, int publicationYear, int availableCopies) {
         setTitle(title);

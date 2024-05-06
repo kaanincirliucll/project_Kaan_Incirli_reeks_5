@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS PUBLICATION;
+
+CREATE TABLE PUBLICATION(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255), 
+    publicationyear INT, 
+    availablecopies INT,
+    type VARCHAR(255)
+);

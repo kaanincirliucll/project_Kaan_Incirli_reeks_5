@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ucll.be.repository.UsersRepository;
+import ucll.be.repository.*;
 import ucll.be.model.*;
 import ucll.be.exception.*;
 
 @Service
 public class UserService {
-    private UsersRepository userRepository;
+    private UserRepositoryJpa userRepository;
 
-    UserService(UsersRepository userRepository) {
+    UserService(UserRepositoryJpa userRepository) {
         this.userRepository = userRepository;
     }
 
     public List<User> allUsers() {
-        return userRepository.allUsers();
+        return userRepository.findAll();
     }
 
     public List<User> getAllAdults() {
-        return userRepository.allUsers(18);
+        return userRepository.findByAge(18);
     }
 
     public List<User> getUsersWithinAgeRange(int minAge, int maxAge) {

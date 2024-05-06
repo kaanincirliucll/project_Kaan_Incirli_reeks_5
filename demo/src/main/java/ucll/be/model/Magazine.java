@@ -1,8 +1,14 @@
 package ucll.be.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("magazine")
 public class Magazine extends Publication {
-    private String editor;
+
     private String issn;
+    private String editor;
 
     public Magazine(String title, String editor, String issn, int publicationYear, int availableCopies) {
         super(title, publicationYear, availableCopies);
